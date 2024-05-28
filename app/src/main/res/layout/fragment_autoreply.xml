@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:padding="16dp">
+
+    <EditText
+            android:id="@+id/edit_text_new_reply"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Write new auto-reply message"/>
+
+    <Button
+            android:id="@+id/button_add_reply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Reply"
+            android:layout_gravity="center_horizontal"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Message"
+                android:gravity="center"
+                android:textSize="18sp"/>
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Spam"
+                android:gravity="center"
+                android:textSize="18sp"/>
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Auto Reply"
+                android:gravity="center"
+                android:textSize="18sp"/>
+    </LinearLayout>
+
+    <ListView
+            android:id="@+id/auto_reply_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+</LinearLayout>

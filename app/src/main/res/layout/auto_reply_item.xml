@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:padding="8dp">
+
+    <TextView
+            android:id="@+id/auto_reply_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:paddingStart="16dp" tools:ignore="RtlSymmetry"/>
+
+    <CheckBox
+            android:id="@+id/spam_checkbox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingEnd="8dp" tools:ignore="RtlSymmetry"/>
+
+    <CheckBox
+            android:id="@+id/autoreply_checkbox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+</LinearLayout>
