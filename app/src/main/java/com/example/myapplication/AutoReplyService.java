@@ -1,14 +1,3 @@
-// AutoReplyService.java
-package com.example.myapplication;
-
-import android.app.Service;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.os.IBinder;
-import androidx.annotation.Nullable;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStoreOwner;
-
 public class AutoReplyService extends Service {
 
     private SmsReceiver smsReceiver;
@@ -16,6 +5,7 @@ public class AutoReplyService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        // Initialise et enregistre le récepteur de SMS
         smsReceiver = new SmsReceiver();
         IntentFilter filter = new IntentFilter("android.provider.Telephony.SMS_RECEIVED");
         registerReceiver(smsReceiver, filter);
@@ -23,18 +13,19 @@ public class AutoReplyService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        return START_STICKY;
+        return START_STICKY; // Permet au service de se recréer s'il est détruit par le système
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        // Désenregistre le récepteur de SMS lors de la destruction du service
         unregisterReceiver(smsReceiver);
     }
 
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return null;
+        return null; // Service non lié
     }
 }

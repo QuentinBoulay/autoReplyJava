@@ -1,14 +1,3 @@
-package com.example.myapplication;
-
-import android.app.Application;
-import android.util.Log;
-
-import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class SharedViewModel extends AndroidViewModel {
     private List<String> selectedContactNumbersTab1;
     private String selectedContactNumberTab3;
@@ -17,9 +6,10 @@ public class SharedViewModel extends AndroidViewModel {
 
     public SharedViewModel(@NonNull Application application) {
         super(application);
-        this.selectedContactNumbersTab1 = new ArrayList<>();
+        this.selectedContactNumbersTab1 = new ArrayList<>(); // Initialisation de la liste des contacts sélectionnés
     }
 
+    // Getters et setters pour les différentes propriétés partagées
     public List<String> getSelectedContactNumbersTab1() {
         return selectedContactNumbersTab1;
     }

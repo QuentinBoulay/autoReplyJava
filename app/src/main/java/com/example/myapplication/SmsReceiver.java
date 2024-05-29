@@ -1,24 +1,12 @@
-package com.example.myapplication;
-
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.telephony.SmsManager;
-import android.telephony.SmsMessage;
-import android.util.Log;
-import android.telephony.PhoneNumberUtils;
-
 public class SmsReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
         SharedPreferences prefs = context.getSharedPreferences("AutoReplyPrefs", Context.MODE_PRIVATE);
-        boolean isAutoReplyEnabled = prefs.getBoolean("auto_reply_enabled", false);
+        boolean isAutoReplyEnabled = prefs.getBoolean("auto_reply_enabled", false); // Vérifie si la réponse automatique est activée
 
         if (!isAutoReplyEnabled) {
-            return;
+            return; // Si désactivé, sort de la méthode
         }
 
         Bundle bundle = intent.getExtras();
@@ -35,7 +23,7 @@ public class SmsReceiver extends BroadcastReceiver {
                         String autoReplyMessage = prefs.getString("selected_auto_reply_message", null);
                         if (autoReplyMessage != null && !autoReplyMessage.isEmpty()) {
                             SmsManager smsManager = SmsManager.getDefault();
-                            smsManager.sendTextMessage(sender, null, autoReplyMessage, null, null);
+                            smsManager.sendTextMessage(sender, null, autoReplyMessage, null, null); // Envoie la réponse automatique
                         }
                     }
                 }

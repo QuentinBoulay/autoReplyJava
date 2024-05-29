@@ -1,24 +1,3 @@
-package com.example.myapplication;
-
-import android.Manifest;
-import android.content.ContentResolver;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListView;
-
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class ContactsFragment extends Fragment {
 
     private ListView contactsListView;
@@ -29,25 +8,25 @@ public class ContactsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class); // Obtient le ViewModel partagé
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contacts, container, false);
-        // Vérifiez les permissions et chargez le contenu initial.
+        // Vérifie les permissions et charge les contacts
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
             contactsListView = view.findViewById(R.id.contacts_list_view);
-            contactsList = getContacts();
+            contactsList = getContacts(); // Charge les contacts depuis le ContentResolver
             adapter = new ContactsAdapter(getActivity(), contactsList, this);
             contactsListView.setAdapter(adapter);
             contactsListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
-            // Configuration de l'écouteur de clics pour mettre à jour les contacts sélectionnés
             contactsListView.setOnItemClickListener((parent, view1, position, id) -> {
-                updateSelectedContacts();
+                updateSelectedContacts(); // Met à jour les contacts sélectionnés
             });
 
+            // Met à jour l'état de sélection des contacts selon le ViewModel partagé
             List<String> selectedContacts = sharedViewModel.getSelectedContactNumbersTab1();
             for (int i = 0; i < contactsList.size(); i++) {
                 if (selectedContacts.contains(contactsList.get(i))) {
@@ -69,7 +48,7 @@ public class ContactsFragment extends Fragment {
             while (cursor.moveToNext()) {
                 try {
                     String phoneNumber = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                    contacts.add(phoneNumber);
+                    contacts.add(phoneNumber); // Ajoute les numéros de téléphone à la liste
                 } catch (IllegalArgumentException e) {
                     Log.e("ContactsFragment", "Error reading contact", e);
                 }
@@ -83,10 +62,10 @@ public class ContactsFragment extends Fragment {
         ArrayList<String> selectedContacts = new ArrayList<>();
         for (int i = 0; i < contactsListView.getCount(); i++) {
             if (contactsListView.isItemChecked(i)) {
-                selectedContacts.add(contactsList.get(i));
+                selectedContacts.add(contacts.get(i)); // Met à jour la liste des contacts sélectionnés
             }
         }
-        sharedViewModel.setSelectedContactNumbersTab1(selectedContacts);
+        sharedViewModel.setSelectedContactNumbersTab1(selectedContacts); // Met à jour le ViewModel partagé
     }
 
     public boolean isItemChecked(int position) {

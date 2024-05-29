@@ -1,15 +1,3 @@
-package com.example.myapplication;
-
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.TextView;
-
-import java.util.List;
-
 public class ContactsAdapter extends ArrayAdapter<String> {
     private Context context;
     private List<String> contacts;
@@ -41,11 +29,11 @@ public class ContactsAdapter extends ArrayAdapter<String> {
         holder.contactName.setText(contact);
 
         holder.checkBox.setOnCheckedChangeListener(null);
-        holder.checkBox.setChecked(contactsFragment.isItemChecked(position));
+        holder.checkBox.setChecked(contactsFragment.isItemChecked(position)); // Met à jour l'état de la case à cocher
 
         holder.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             contactsFragment.setItemChecked(position, isChecked);
-            contactsFragment.updateSelectedContacts();
+            contactsFragment.updateSelectedContacts(); // Met à jour les contacts sélectionnés lors du changement de l'état de la case à cocher
         });
 
         return convertView;

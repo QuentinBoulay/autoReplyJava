@@ -81,6 +81,7 @@ public class AutoReplyFragment extends Fragment {
         }
         return new ArrayList<>();
     }
+
     // Méthode pour sauvegarder les réponses automatiques
     private void saveAutoReplies() {
         SharedPreferences prefs = getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
